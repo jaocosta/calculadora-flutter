@@ -1,6 +1,6 @@
 
 class Memory {
-  static const operations = const ['%', '/', '+', '-', '*', '='];
+  static const operations = const ['%', '/', '+', '-', 'x', '='];
   String _operation;
   bool _usedOperation = false;
   final _buffer = [0.0, 0.0];
@@ -34,6 +34,7 @@ class Memory {
 
   void deleteEndDigit() {
     result = result.length > 1 ? result.substring(0, result.length - 1) : '0';
+    _buffer[_bufferIndex] = double.tryParse(result);
   }
 
   void _addDigit(String digit) {
@@ -53,6 +54,10 @@ class Memory {
 
     if (_bufferIndex == 0) {
       _bufferIndex = 1;
+
+      if (operation == '=')
+      _operation = operation;
+
     } else {
       _buffer[0] = _calculate();
     }
@@ -69,7 +74,7 @@ class Memory {
     switch (_operation) {
       case '%':
         return _buffer[0] % _buffer[1];
-      case '÷':
+      case '/':
         return _buffer[0] / _buffer[1];
       case 'x':
         return _buffer[0] * _buffer[1];
