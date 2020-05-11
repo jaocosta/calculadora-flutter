@@ -1,3 +1,4 @@
+
 class Memory {
   static const operations = const ['%', '/', '+', '-', '*', '='];
   String _operation;
@@ -23,7 +24,7 @@ class Memory {
     if (command == 'AC') {
       _clear();
     } else if (command == 'DEL') {
-      _deleteEndDigit();
+      deleteEndDigit();
     } else if (operations.contains(command)) {
       _setOperation(command);
     } else {
@@ -31,7 +32,7 @@ class Memory {
     }
   }
 
-  void _deleteEndDigit() {
+  void deleteEndDigit() {
     result = result.length > 1 ? result.substring(0, result.length - 1) : '0';
   }
 
